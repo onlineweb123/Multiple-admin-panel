@@ -17,12 +17,12 @@ p {
 }
 
 form {
-  max-width: 600px;
   margin: 0 auto;
   background-color: #ffffff;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   border-radius: 8px;
+  /* Removed max-width to allow full width */
 }
 
 input[type="text"], input[type="file"] {
@@ -52,4 +52,12 @@ button:hover {
   margin-top: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+/* New: Make images responsive */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px auto;
 }
