@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel - Nutrition Tamil</title>
+  <link rel="stylesheet" href="style_admin.css">
+</head>
+<body>
+  <h1>Admin Panel (Private)</h1>
+  <p>Nutrition Tamil தகவல்களை மாற்றவும்:</p>
+
+  <form id="adminForm">
+    <label>தலைப்பு (Headline):</label><br>
+    <input type="text" id="headline"><br><br>
+
+    <label>விலை 1:</label><br>
+    <input type="text" id="price1"><br><br>
+
+    <label>விலை 2:</label><br>
+    <input type="text" id="price2"><br><br>
+
+    <label>Whatsapp எண்:</label><br>
+    <input type="text" id="whatsapp"><br><br>
+
+    <label>படம் 1:</label><br>
+    <input type="file" id="photo1"><br>
+    <img id="preview1" class="preview"><br><br>
+
+    <label>படம் 2:</label><br>
+    <input type="file" id="photo2"><br>
+    <img id="preview2" class="preview"><br><br>
+
+    <button type="button" onclick="saveChanges()">Save Changes</button>
+  </form>
+
+  <script>
+    function saveChanges() {
+      localStorage.setItem("headline", document.getElementById("headline").value);
+      localStorage.setItem("price1", document.getElementById("price1").value);
+      localStorage.setItem("price2", document.getElementById("price2").value);
+      localStorage.setItem("whatsapp", document.getElementById("whatsapp").value);
+
+      const photo1 = document.getElementById("photo1").files[0];
+      const photo2 = document.getElementById("photo2").files[0];
+
+      if (photo1) {
+        const reader1 = new FileReader();
+        reader1.onload = function(e) {
+          localStorage.setItem("photo1", e.target.result);
+          document.getElementById("preview1").src = e.target.result;
+        };
+        reader1.readAsDataURL(photo1);
+      }
+
+      if (photo2) {
+        const reader2 = new FileReader();
+        reader2.onload = function(e) {
+          localStorage.setItem("photo2", e.target.result);
+          document.getElementById("preview2").src = e.target.result;
+        };
+        reader2.readAsDataURL(photo2);
+      }
+
+      alert("மாற்றங்கள் சேமிக்கப்பட்டன!");
+    }
+
+    window.onload = function() {
+      document.getElementById("headline").value = localStorage.getItem("headline") || "Nutrition Tamil";
+      document.getElementById("price1").value = localStorage.getItem("price1") || "Rs: 2500";
+      document.getElementById("price2").value = localStorage.getItem("price2") || "Rs: 1,899";
+      document.getElementById("whatsapp").value = localStorage.getItem("whatsapp") || "+919344165879";
+
+      document.getElementById("preview1").src = localStorage.getItem("photo1") || "";
+      document.getElementById("preview2").src = localStorage.getItem("photo2") || "";
+    };
+  </script>
+</body>
+</html>
